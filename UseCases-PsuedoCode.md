@@ -1,5 +1,5 @@
 
-# Word-Guess-Java
+# com.example.wordapi.Word-Guess-Java
 
 ## Node version of Presidential themed name guess game
 
@@ -26,7 +26,7 @@ The game format is
 1.  user starts bash session
 
 2.  user begins with java program in terminal
-    1. displays 'Welcome to Word Guess - US Presidential Edition'
+    1. displays 'Welcome to com.example.wordapi.Word Guess - US Presidential Edition'
     2. displays 'Solve each of the 44 president name puzzles, use keyboard A through Z'
     3. displays 'You lose the puzzle if you accumlate 6 miss quesses, lets begin'
     4. displays the 'word is:   - - - - -    -    - - - -'  (for GEORGE W BUSH)
@@ -43,26 +43,26 @@ The game format is
     2. user can type again
 
 5.  user types new letter that is not in puzzle and guesses remain
-    1.  display 'Letter <key> is a miss, n guesses remaining'
+    1.  display 'com.example.wordapi.Letter <key> is a miss, n guesses remaining'
     2.  user can type again
 
 6.  user types new letter that is not in puzzle no remaining guesses
-    1.  display 'Letter <key> is a miss, no remainig guesses'
+    1.  display 'com.example.wordapi.Letter <key> is a miss, no remainig guesses'
     2.  display 'Solution is: G E O R G E    W    B U S H'
-    3.  display 'Next Word'
+    3.  display 'Next com.example.wordapi.Word'
     4.  displays the 'word is:   _ _ _ _    _ _ _ _ _ _ _'  (for B I L L    C L I N T O N)
 
 7.  user types new letter that is in the puzzle but doesn't solve puzzle yet
-    1.  display 'Letter <key> is a hit.
+    1.  display 'com.example.wordapi.Letter <key> is a hit.
     2.  display 'word is:  G _ _ _ G _    _    _ _ _ _"  (for G in George W Bush)
 
 8.  user types new letter that solves puzzle
     1.  display 'Solved, word is G E O R G E    W    B U S H'
-    2.  display 'Next Word'
+    2.  display 'Next com.example.wordapi.Word'
     4.  displays the 'word is:   _ _ _ _    _ _ _ _ _ _ _'  (for B I L L    C L I N T O N)
 
 9.  user losses or solves last puzzle
-    1. display 'Nice Game - you got X of 44 correct'
+    1. display 'Nice com.example.wordgame.Game - you got X of 44 correct'
     2. *** if coding time permits allow for prompt to Play Again)
         1. this would re-randomize the word pool and start new game
 
@@ -96,7 +96,7 @@ The game format is
             4. solveWord - used when player exhausts guesses
     3. word pool
         1. Properties
-            1. words - array of Word objects
+            1. words - array of com.example.wordapi.Word objects
         2. Methods
             1. init - used in constructor - takes array of word strings and intializes word array 
                loads words randomly so each time game played order is different

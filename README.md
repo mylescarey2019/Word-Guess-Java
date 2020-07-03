@@ -1,4 +1,4 @@
-# Word-Guess 
+# com.example.wordapi.Word-Guess 
 
 ## Java version of Presidential themed name guess game
 
@@ -12,7 +12,7 @@ This Java app has command line interface for playing a hangman style game using 
 1. TBD
  
 
-## Game Format
+## com.example.wordgame.Game Format
 
 1.  User is presented with a random presidential name to guess showing letters as underscores initially
 2.  User guess letter via keyboard - results revealed

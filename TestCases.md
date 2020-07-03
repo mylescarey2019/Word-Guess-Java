@@ -1,11 +1,11 @@
-# Word-Guess-Java
+# com.example.wordapi.Word-Guess-Java
 
 ## Java version of Presidential themed name guess game
 
 ## Test Cases
 
 Functionality Cases
-1. Letter entered 
+1. com.example.wordapi.Letter entered 
     1. already used
         1. message displayed showing letters already used
         2. message displayed - showing puzzle state again

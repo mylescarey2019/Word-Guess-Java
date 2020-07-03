@@ -1,3 +1,5 @@
+package com.example.wordapi;
+
 public class Letter {
     Character letter;
     Boolean isKnown;
@@ -9,7 +11,7 @@ public class Letter {
 
     // placeholder method
     public void summary() {
-        System.out.println("in Letter class object summary method");
-        System.out.println("Letter is: " + letter + " is known is: " + isKnown);
+        System.out.println("in com.example.wordapi.Letter class object summary method");
+        System.out.println("in com.example.wordapi.Letter is: " + letter + " is known is: " + isKnown);
     }
 }
