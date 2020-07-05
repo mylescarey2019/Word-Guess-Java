@@ -8,5 +8,7 @@ public class Game {
         System.out.println("in com.example.wordgame.Game class object summary method");
         WordPool wordPool = new WordPool();
         wordPool.summary();
+        GuessLogic guess = new GuessLogic();
+        guess.summary();
     }
 }
