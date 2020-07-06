@@ -1,5 +1,7 @@
 package com.example.wordapi;
 
+// class for letter in the puzzle's word
+// letter starts unknown to player unless it is a space between names or initials
 public class Letter {
     private char _letter;
     private boolean _isKnown;
