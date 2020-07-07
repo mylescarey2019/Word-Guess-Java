@@ -5,21 +5,31 @@ import java.util.ArrayList;
 // takes string parameter and creates property array of Letter objects
 public class Word {
     private ArrayList<Letter> letters = new ArrayList<Letter>();
+    private String originalWord;
 
     public Word(String word) {
+        originalWord = word;
         // building a character array of parameter word string
         // iterating over array adding a Letter Class object for each character
-        char[] wordChars = word.toCharArray();
+        char[] wordChars = originalWord.toCharArray();
         for (char ch : wordChars) {
             letters.add(new Letter(ch));
         }
     }
 
+    // update the word's letters following a guess attempt
+    // iterate over this.letters array and call guessLetter() for each letter
+    // this will set isKnown to true if the letter == guessedLetter
+    public void updateWord(char guessedLetter) {
+        for (Letter letter : letters) {
+            letter.guessLetter(guessedLetter);
+        }
+    }
 
     // return formatted string ready for use on the terminal
     // has 2 spaces between letters and 4 spaces between words or initials
-    // example: 'G  E  O  R  G  E    W    B  U  S  H'
-    // example: '_  _  _  _  _  _    _    _  _  _  _'
+    // example: 'H  A  R  R  R  Y    S    T  R  U  M  A  N'
+    // example: '_  _  _  _  _  _    _    _  _  _  _  _  _'
     public String getDisplayableWord() {
         // 1.  iterate over letters object array
         // 2.  if character is space then add 4 spaces to the return
@@ -39,7 +49,6 @@ public class Word {
         return displayableWord;
     }
 
-
     // solve the word and return displayable version
     // needed for when user has exhausted all guesses for a word
     public String getSolvedDisplayableWord() {
@@ -48,6 +57,25 @@ public class Word {
             letter.forceReveal();
         }
         return this.getDisplayableWord();
+    }
+
+    // is the word solved
+    public boolean isSolved() {
+        for (Letter letter : letters) {
+            if (!letter.getIsKnown()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // diagnostic display of word's letters array
+    public void showWordLetters() {
+
+        for (Letter letter : letters) {
+            System.out.println("Original word is: " +  originalWord + "...Letter is: "
+                    + letter.getLetter() + " is known: " + letter.getIsKnown());
+        }
     }
 
     // placeholder method
