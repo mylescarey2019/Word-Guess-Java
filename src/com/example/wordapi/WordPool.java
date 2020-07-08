@@ -1,6 +1,43 @@
 package com.example.wordapi;
 
+import java.util.ArrayList;
+
+// class for pool of word objects that are the game's president names
+// takes a array of names, uses them to create array of word objects in this pool object
 public class WordPool {
+    private ArrayList<Word> words = new ArrayList<Word>();
+
+    public WordPool(String[] puzzleWordList) {
+        // placeholder logic - expect fixed ArrayList with 3 elements
+        for (int i = 0; i < 3; i++) {
+            words.add(new Word(puzzleWordList[i]));
+        }
+
+        // to-do logic:
+        // randomly pull name from the puzzle list parameter, instansiate new word object for each - push into words array
+        // remove name from puzzle list parameter - continue until all names created as word objects
+    }
+
+    // returns whether any words objects remain in the word pool
+    public boolean isWordRemaining() {
+        return (words.size() > 0) ? true : false;
+    }
+
+    // remove and return next word object from pool,
+    // return undefined if empty - pop works in javascript - will need to see
+    // if out-of-bounds handling is necessary
+    public Word getWordFromPool() {
+        return (words.size() > 0) ? words.remove(words.size() - 1) : null ;
+    }
+
+    // diagnostic word pool dump - show word string from each word object in pool
+    public void showWords() {
+        int endIndex = (words.size() > 0) ? words.size() : -1;
+        for (int i = 0; i < endIndex; i++) {
+            System.out.println("word " + i + " is " + words.get(i).showOriginalWordString());
+        }
+    }
+
     // placeholder method
     public void summary() {
         System.out.println("in com.example.wordapi.WordPool class object summary method");

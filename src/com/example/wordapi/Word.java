@@ -69,6 +69,11 @@ public class Word {
         return true;
     }
 
+    // diagnostic return original word string
+    public String showOriginalWordString() {
+        return originalWord;
+    }
+
     // diagnostic display of word's letters array
     public void showWordLetters() {
 
