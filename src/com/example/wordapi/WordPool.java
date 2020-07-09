@@ -1,7 +1,6 @@
 package com.example.wordapi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 // class for pool of word objects that are the game's president names
 // takes a array of names, uses them to create array of word objects in this pool object
