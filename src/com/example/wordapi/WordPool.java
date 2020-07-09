@@ -1,21 +1,22 @@
 package com.example.wordapi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // class for pool of word objects that are the game's president names
 // takes a array of names, uses them to create array of word objects in this pool object
 public class WordPool {
     private ArrayList<Word> words = new ArrayList<Word>();
 
-    public WordPool(String[] puzzleWordList) {
-        // placeholder logic - expect fixed ArrayList with 3 elements
-        for (int i = 0; i < 3; i++) {
-            words.add(new Word(puzzleWordList[i]));
-        }
-
-        // to-do logic:
-        // randomly pull name from the puzzle list parameter, instansiate new word object for each - push into words array
+    public WordPool(ArrayList<String> puzzleWordList) {
+        // randomly pull name from the puzzle list parameter, instantiate new word object, push into words array
         // remove name from puzzle list parameter - continue until all names created as word objects
+        int listLength = puzzleWordList.size();
+        for (int i = 0; i < listLength; i++) {
+            int nextNameIndex = (int) (Math.floor(Math.random() * puzzleWordList.size()));
+            words.add(new Word(puzzleWordList.get(nextNameIndex)));
+            puzzleWordList.remove(nextNameIndex);
+        }
     }
 
     // returns whether any words objects remain in the word pool

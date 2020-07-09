@@ -4,12 +4,14 @@ import com.example.wordapi.Word;
 import com.example.wordapi.WordPool;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game {
     // placeholder method
     public void summary() {
         System.out.println("in com.example.wordgame.Game class object summary method");
-        String[] puzzleList = {"JAMES POLK", "BARACK OBAMA", "RONALD REAGAN"};
+        ArrayList<String> puzzleList = new ArrayList<String>(Arrays.asList("JAMES POLK",
+                "BARACK OBAMA","RONALD REAGAN"));
         WordPool wordPool = new WordPool(puzzleList);
         System.out.println("Word remaining: " + wordPool.isWordRemaining());
         wordPool.showWords();
