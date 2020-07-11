@@ -4,11 +4,12 @@ import com.example.wordapi.Word;
 import com.example.wordapi.WordPool;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 // class for game logic
 // this contains the core letter guessing logic, tracks game score, and draws down the word pool
 public class GameLogic {
-    private ArrayList<String> puzzleWordList;
+    // REMOVE* private ArrayList<String> puzzleWordList;
     //private WordPool wordPool;
     public WordPool wordPool;  // temporally made public
     public Word currentWord;
@@ -17,7 +18,7 @@ public class GameLogic {
     private String savedDisplayableWord;
     public int wordsWon;
     public int wordLost;
-    private char[] lettersGuessed;
+    private ArrayList<Character> lettersGuessed = new ArrayList<Character>();
 
     public GameLogic(ArrayList<String> puzzleWordList ) {
         wordPool = new WordPool(puzzleWordList);
@@ -43,15 +44,35 @@ public class GameLogic {
         System.out.println("\nThe first name is [" +  savedDisplayableWord + "]");
     }
 
-    public void processGuess(char letterGuess) {
-        // to-do learn how to leverage inner class methods for use in outer method
-        // learn lambdas to see if they are applicable here
-        class GuessHelpers {
-            public void validateGuess(char letter) {}  // will need to return boolean & String
-            public void printGuessResult(boolean isHit, boolean roundOver) {}
-            public void printWordEndResult(boolean isSolved, boolean gameOver) {}
+    public void nextWord() {
+        guesses = 6;
+        lettersGuessed.clear();
+        currentWord = wordPool.getWordFromPool();
+        if (currentWord != null) {
+            savedDisplayableWord = currentWord.getDisplayableWord();
         }
+    }
 
+    public void diagnosticSummary() {
+        System.out.println("============");
+        System.out.println("Current word is " + currentWord.getDisplayableWord());
+        System.out.println("Guess Remaining: " + guesses + " words won: "
+            + wordsWon + " words lost: " + wordLost);
+        System.out.println("Letters guessed: " + guessedLetterString());
+    }
+
+    private String guessedLetterString() {
+        return lettersGuessed.stream()
+                .map(letter -> letter.toString())
+                .collect(Collectors.joining());
+    }
+
+    private void validateGuess(char letter) {}  // will need to return boolean & String
+    private void printGuessResult(boolean isHit, boolean roundOver) {}
+    private void printWordEndResult(boolean isSolved, boolean gameOver) {}
+
+    public void processGuess(char letterGuess) {
+        lettersGuessed.add(letterGuess);
         // main logic of processGuess goes here and needs to utilize the GuessHelper methods
     }
 

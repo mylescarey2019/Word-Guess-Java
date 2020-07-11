@@ -27,7 +27,7 @@ public class WordPool {
     // return undefined if empty - pop works in javascript - will need to see
     // if out-of-bounds handling is necessary
     public Word getWordFromPool() {
-        return (words.size() > 0) ? words.remove(words.size() - 1) : null ;
+        return (words.size() > 0) ? words.remove(words.size() - 1) : null;
     }
 
     // diagnostic word pool dump - show word string from each word object in pool

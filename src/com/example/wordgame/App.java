@@ -5,6 +5,6 @@ public class App {
         System.out.println("in WordGuess main");
 
         Game wordGuessGame = new Game();
-        wordGuessGame.summary();
+        wordGuessGame.playGame();
     }
 }
