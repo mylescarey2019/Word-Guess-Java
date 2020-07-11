@@ -1,6 +1,7 @@
 package com.example.wordapi;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 // class for pool of word objects that are the game's president names
 // takes a array of names, uses them to create array of word objects in this pool object
@@ -24,10 +25,8 @@ public class WordPool {
     }
 
     // remove and return next word object from pool,
-    // return undefined if empty - pop works in javascript - will need to see
-    // if out-of-bounds handling is necessary
     public Word getWordFromPool() {
-        return (words.size() > 0) ? words.remove(words.size() - 1) : null;
+        return words.remove(words.size() - 1);
     }
 
     // diagnostic word pool dump - show word string from each word object in pool

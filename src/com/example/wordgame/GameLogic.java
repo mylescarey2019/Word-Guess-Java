@@ -6,6 +6,7 @@ import com.example.wordapi.WordPool;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+
 // class for game logic
 // this contains the core letter guessing logic, tracks game score, and draws down the word pool
 public class GameLogic {
@@ -19,6 +20,8 @@ public class GameLogic {
     public int wordsWon;
     public int wordLost;
     private ArrayList<Character> lettersGuessed = new ArrayList<Character>();
+    public boolean hasWordToPlay; // a word has been retrieved by method getWordFromPool and is ready for use
+
 
     public GameLogic(ArrayList<String> puzzleWordList ) {
         wordPool = new WordPool(puzzleWordList);
@@ -28,15 +31,18 @@ public class GameLogic {
         state = GameState.GOTONEXTWORD;
         savedDisplayableWord = "";
 
+
         // temp debug output
             System.out.println("Word remaining: " + wordPool.isWordRemaining());
             wordPool.showWords();
         //
 
-        currentWord = wordPool.getWordFromPool(); // Word object
-        if (currentWord != null) {
-            savedDisplayableWord = currentWord.getDisplayableWord();
-        }
+        nextWord();
+        //currentWord = wordPool.getWordFromPool(); // Word object
+        //if (currentWord != null) {
+        //if (currentWord.isPresent()) {
+        //    savedDisplayableWord = currentWord.getDisplayableWord();
+        //}
 
         System.out.println("\nWelcome to Word Guess - US Presidential Edition");
         System.out.println("Solve each of the 44 president name puzzles, use keyboard A through Z");
@@ -44,13 +50,13 @@ public class GameLogic {
         System.out.println("\nThe first name is [" +  savedDisplayableWord + "]");
     }
 
+    // reset guess count, clear used letter array, get next word object from pool
     public void nextWord() {
         guesses = 6;
         lettersGuessed.clear();
         currentWord = wordPool.getWordFromPool();
-        if (currentWord != null) {
-            savedDisplayableWord = currentWord.getDisplayableWord();
-        }
+        hasWordToPlay = true;
+        savedDisplayableWord = currentWord.getDisplayableWord();
     }
 
     public void diagnosticSummary() {
@@ -67,12 +73,39 @@ public class GameLogic {
                 .collect(Collectors.joining());
     }
 
-    private void validateGuess(char letter) {}  // will need to return boolean & String
+    private ValidateGuessResult validateGuess(char letter) {
+        boolean valid = true;
+        String errorMsg = "";
+
+        if (Character.toString(letter).matches("[a-zA-Z]")) {
+            valid = true;
+            errorMsg = "You typed '" + letter + "'";
+            if(lettersGuessed.contains(Character.toUpperCase(letter))) {
+                valid = false;
+                errorMsg = "'" + letter + "' has already been used.  Letters used: " + guessedLetterString();
+            }
+        } else {
+            valid = false;
+            errorMsg = "You typed '" + letter + "' please type 'a' through 'z'";
+        }
+        return new ValidateGuessResult(valid,errorMsg);
+    }
+
     private void printGuessResult(boolean isHit, boolean roundOver) {}
     private void printWordEndResult(boolean isSolved, boolean gameOver) {}
 
     public void processGuess(char letterGuess) {
-        lettersGuessed.add(letterGuess);
+        ValidateGuessResult results = validateGuess(letterGuess);
+        boolean validGuess = results.getIsValid();
+        String guessErrorMsg = results.getMessage();
+
+        if (validGuess) {
+            lettersGuessed.add(Character.toUpperCase(letterGuess));
+        }
+        System.out.println(validGuess + " : " + guessErrorMsg);
+
+
+        //lettersGuessed.add(letterGuess);
         // main logic of processGuess goes here and needs to utilize the GuessHelper methods
     }
 

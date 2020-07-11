@@ -13,23 +13,26 @@ public class Game {
         ArrayList<String> puzzleList = new ArrayList<String>(Arrays.asList("JAMES POLK",
                 "FRANKLIN D ROOSEVELT", "BARACK OBAMA"));
         GameLogic gameLogic = new GameLogic(puzzleList);
+
         //WordPool wordPool = new WordPool(puzzleList);
+        gameLogic.processGuess('a');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('x');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('a');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('k');
+        gameLogic.diagnosticSummary();
 
-        gameLogic.processGuess('A');
-        gameLogic.diagnosticSummary();
-        gameLogic.processGuess('X');
-        gameLogic.diagnosticSummary();
-        gameLogic.processGuess('C');
-        gameLogic.diagnosticSummary();
-        gameLogic.processGuess('K');
-        gameLogic.diagnosticSummary();
-
-        while (gameLogic.currentWord != null)  {
-            System.out.println("Word remaining: " + gameLogic.wordPool.isWordRemaining());
+        while (gameLogic.hasWordToPlay) {
             gameLogic.wordPool.showWords();
             gameLogic.diagnosticSummary();
-            gameLogic.nextWord();
+            gameLogic.hasWordToPlay = false;  // don't know if game has any words left yet
+            if (gameLogic.wordPool.isWordRemaining()) {
+                gameLogic.nextWord();
+            }
         }
+
         System.out.println("no more words left ");
 
 //        //Word word1 = gameLogic.wordPool.getWordFromPool();
