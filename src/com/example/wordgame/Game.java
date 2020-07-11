@@ -10,8 +10,9 @@ public class Game {
     // placeholder method
     public void playGame() {
         System.out.println("in com.example.wordgame.Game class object summary method");
-        ArrayList<String> puzzleList = new ArrayList<String>(Arrays.asList("JAMES POLK",
-                "FRANKLIN D ROOSEVELT", "BARACK OBAMA"));
+//        ArrayList<String> puzzleList = new ArrayList<String>(Arrays.asList("JAMES POLK",
+//                "FRANKLIN D ROOSEVELT", "BARACK OBAMA"));
+        ArrayList<String> puzzleList = new ArrayList<String>(Arrays.asList("MILO"));
         GameLogic gameLogic = new GameLogic(puzzleList);
 
         //WordPool wordPool = new WordPool(puzzleList);
@@ -19,10 +20,27 @@ public class Game {
         gameLogic.diagnosticSummary();
         gameLogic.processGuess('x');
         gameLogic.diagnosticSummary();
-        gameLogic.processGuess('a');
+        gameLogic.processGuess('M');
         gameLogic.diagnosticSummary();
         gameLogic.processGuess('k');
         gameLogic.diagnosticSummary();
+        gameLogic.processGuess('m');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('a');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('i');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('l');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('q');
+//        gameLogic.diagnosticSummary();
+//        gameLogic.processGuess('y');
+//        gameLogic.diagnosticSummary();
+//        gameLogic.processGuess('7');
+//        gameLogic.diagnosticSummary();
+//        gameLogic.processGuess('s');
+        gameLogic.diagnosticSummary();
+        gameLogic.processGuess('o');
 
         while (gameLogic.hasWordToPlay) {
             gameLogic.wordPool.showWords();

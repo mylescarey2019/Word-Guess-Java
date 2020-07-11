@@ -1,10 +1,10 @@
 package com.example.wordgame;
 
-public class ValidateGuessResult {
+public class GuessPreCheckResult {
     private boolean isValid;
     private String message;
 
-    public ValidateGuessResult(boolean isValid, String message) {
+    public GuessPreCheckResult(boolean isValid, String message) {
         this.isValid = isValid;
         this.message = message;
     }
