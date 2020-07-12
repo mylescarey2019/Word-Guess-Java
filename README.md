@@ -43,10 +43,16 @@ This Java app has command line interface for playing a hangman style game using 
   - ####  [UseCases and Pseudo Code](UseCases-PseudoCode.md)
 
   - ####  [Test Cases](TestCases.md)
-
-#### Example walk-through GIF (shows abbreviated 3 word test) :  coming soon
+  
 
  
+## Class Model
+   ![object-model](assets/images/object-model.jpg)   
+
+
+## Demo GIF (shows abbreviated 2 word session) 
+#### ![word-guess-node-test](assets/images/demo.gif)
+
 
 ## Getting Started
 

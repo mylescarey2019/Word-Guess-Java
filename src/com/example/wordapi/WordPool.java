@@ -10,14 +10,15 @@ public class WordPool {
     private ArrayList<Word> words = new ArrayList<Word>();
 
     public WordPool(ArrayList<String> puzzleWordList) {
+        // create copy of puzzle list to allow safe mutation within this constructor
+        ArrayList<String> puzzleWords = new ArrayList<String>(puzzleWordList);
         // for user chosen number of names to guess:
         // randomly pull name from the puzzle list parameter, instantiate new word object, push into words array
         // remove name from puzzle list parameter - continue until all names created as word objects
-
         for (int i = 0; i < Game.nameCount; i++) {
-            int nextNameIndex = (int) (Math.floor(Math.random() * puzzleWordList.size()));
-            words.add(new Word(puzzleWordList.get(nextNameIndex)));
-            puzzleWordList.remove(nextNameIndex);
+            int nextNameIndex = (int) (Math.floor(Math.random() * puzzleWords.size()));
+            words.add(new Word(puzzleWords.get(nextNameIndex)));
+            puzzleWords.remove(nextNameIndex);
         }
     }
 
