@@ -16,8 +16,10 @@ This Java app has command line interface for playing a hangman style game using 
 5. Array Lists
 6. enum
 7. wrapper classes
-8. terminal scanner command line interface
-9. regex
+8. stream
+9. lambda expression
+10. regex
+11. terminal scanner command line interface
  
 
 ## Game Format
