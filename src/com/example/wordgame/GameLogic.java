@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 // class for game logic
 // this contains the core letter guessing logic, tracks game score, and draws down the word pool
 public class GameLogic {
-    // REMOVE* private ArrayList<String> puzzleWordList;
-    //private WordPool wordPool;
-    public WordPool wordPool;  // temporally made public
+    //private WordPool wordPool; // temporally made public - revert to private when ready
+    public WordPool wordPool;  // temporally made public - revert to private when ready
     public Word currentWord;
     private int guesses;
     public GameState state;
@@ -22,7 +21,6 @@ public class GameLogic {
     private ArrayList<Character> lettersGuessed = new ArrayList<Character>();
     public boolean hasWordToPlay; // a word has been retrieved by method getWordFromPool and is ready for use
 
-
     public GameLogic(ArrayList<String> puzzleWordList ) {
         wordPool = new WordPool(puzzleWordList);
         guesses = 6;
@@ -31,18 +29,11 @@ public class GameLogic {
         state = GameState.GOTONEXTWORD;
         savedDisplayableWord = "";
 
+        // temp debug output REMOVE* - when all testing done
+//            System.out.println("Word remaining: " + wordPool.isWordRemaining());
+//            wordPool.showWords();
 
-        // temp debug output
-            System.out.println("Word remaining: " + wordPool.isWordRemaining());
-            wordPool.showWords();
-        //
-
-        nextWord();
-        //currentWord = wordPool.getWordFromPool(); // Word object
-        //if (currentWord != null) {
-        //if (currentWord.isPresent()) {
-        //    savedDisplayableWord = currentWord.getDisplayableWord();
-        //}
+        nextWord();  // gets next word from wordpool, sets savedDisplayableWord, guesses, etc.
 
         System.out.println("\nWelcome to Word Guess - US Presidential Edition");
         System.out.println("Solve each of the 44 president name puzzles, use keyboard A through Z");
@@ -59,14 +50,6 @@ public class GameLogic {
         savedDisplayableWord = currentWord.getDisplayableWord();
     }
 
-    public void diagnosticSummary() {
-//        System.out.println("============");
-//        System.out.println("Current word is " + currentWord.getDisplayableWord());
-//        System.out.println("Guess Remaining: " + guesses + " words won: "
-//            + wordsWon + " words lost: " + wordsLost);
-//        System.out.println("Letters guessed: " + guessedLetterString());
-    }
-
     // String version of the guessed char list
     private String guessedLetterString() {
         return lettersGuessed.stream()
@@ -74,7 +57,7 @@ public class GameLogic {
                 .collect(Collectors.joining());
     }
 
-    // helper function to check to if guess key pressed valid letter or not
+    // helper function to check to if guess key pressed is valid letter or not
     private GuessPreCheckResult validateGuess(char letter) {
         boolean isGuessValid = true;
         String errorMsg = "";
@@ -82,7 +65,6 @@ public class GameLogic {
         if (Character.toString(letter).matches("[a-zA-Z]")) {
             if(lettersGuessed.contains(Character.toUpperCase(letter))) {
                 isGuessValid = false;
-
                 errorMsg = "'" + letter + "' has already been used.  Letters used: " + guessedLetterString();
             }
         } else {
@@ -116,7 +98,7 @@ public class GameLogic {
     public void processGuess(char letterGuess) {
         // initial check on the guessed key pressed
         GuessPreCheckResult results = validateGuess(letterGuess);
-        boolean validGuess = results.getIsValid();
+        boolean validGuess = results.isValid();
         String guessErrorMsg = results.getMessage();
 
         if (validGuess) {
@@ -135,7 +117,7 @@ public class GameLogic {
         newDisplayableWord = currentWord.getDisplayableWord();
         boolean isHit = !(savedDisplayableWord.equals(newDisplayableWord));  // guess is a hit
         if (isHit) {
-            // reset saved displayable word to the new word state
+            // reset saved displayable word to the new word state, then capture whether it was solved
             savedDisplayableWord = newDisplayableWord;
             isWordSolved = currentWord.isSolved();
             printGuessResult(isHit, isWordSolved, letterGuess, newDisplayableWord);
@@ -160,17 +142,16 @@ public class GameLogic {
                 state = GameState.KEEPGUESSING;
             }
         }
-
-        // temporary return
-        //return;
-
-
     }
 
 
-
-    // placeholder method
-    public void summary() {
-        System.out.println("in com.example.wordgame.GuessLogic class object summary method");
+    // REMOVE* when all testing done
+    public void diagnosticSummary() {
+//        System.out.println("============");
+//        System.out.println("Current word is " + currentWord.getDisplayableWord());
+//        System.out.println("Guess Remaining: " + guesses + " words won: "
+//            + wordsWon + " words lost: " + wordsLost);
+//        System.out.println("Letters guessed: " + guessedLetterString());
     }
+
 }

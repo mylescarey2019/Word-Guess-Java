@@ -1,5 +1,6 @@
 package com.example.wordgame;
 
+// Container Class for guess key-stroke validation
 public class GuessPreCheckResult {
     private boolean isValid;
     private String message;
@@ -9,8 +10,8 @@ public class GuessPreCheckResult {
         this.message = message;
     }
 
-    public boolean getIsValid() {
-        return isValid;
+    public boolean isValid() {
+        return this.isValid;
     }
 
     public String getMessage() {

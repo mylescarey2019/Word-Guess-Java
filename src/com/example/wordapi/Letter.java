@@ -3,42 +3,30 @@ package com.example.wordapi;
 // class for letter in the puzzle's word
 // letter starts unknown to player unless it is a space between names or initials
 public class Letter {
-    private char _letter;
-    private boolean _isKnown;
+    private char letter;
+    private boolean known;
 
     public Letter(char letter) {
-        this._letter = letter;
-        this._isKnown = letter == ' ';
+        this.letter = letter;
+        this.known = letter == ' ';
     }
 
     // getter - if letter is not known display an underscore
     public char getLetter() {
-        return _isKnown ? _letter : '-';
+        return this.known ? this.letter : '-';
     }
 
-    // temporary helper method
-    public char peakLetter() {
-        return _letter;
-    }
-
-    // a method acting as a 'setter' for _isKnown property
+    // a method acting as a 'setter' for isKnown property
     public void guessLetter(char letter) {
-        _isKnown = Character.toUpperCase(letter) == Character.toUpperCase(_letter) || getIsKnown();
+        this.known = Character.toUpperCase(letter) == Character.toUpperCase(this.letter) || isKnown();
     }
 
-    public boolean getIsKnown() {
-        return _isKnown;
+    public boolean isKnown() {
+        return this.known;
     }
 
     // force the letter to known state without guessing
     public void forceReveal() {
-        _isKnown = true;
-    }
-
-    // placeholder method
-    public void summary() {
-        System.out.println("in com.example.wordapi.Letter class object summary method");
-        System.out.println("in com.example.wordapi.Letter is: " + getLetter() + " is known is: " + getIsKnown() +
-                " revealed value is: " + peakLetter());
+        this.known = true;
     }
 }
