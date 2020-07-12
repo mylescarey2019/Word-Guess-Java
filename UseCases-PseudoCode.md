@@ -1,7 +1,7 @@
 
-# com.example.wordapi.Word-Guess-Java
+# Word-Guess-Java
 
-## Node version of Presidential themed name guess game
+## Java version of Presidential themed name guess game
 
 ## Description
 
@@ -9,26 +9,27 @@ This Java app has command line interface for playing a hangman style game using 
 
 The game format is 
 
+0.  At start of game user can select how many names to play between 1 and 44
 1.  User is presented with a random presidential name to guess showing letters as underscores initially
-2.  User guess letter via keyboard - results reveiled
+2.  User guess letter via keyboard - results revealed
     1. letter not in name
     2. letter in name - underscores replaced with letter
-    3. letter already used - list of previsouly used letters shown
+    3. letter already used - list of previously used letters shown
     4. letter in name and solved the word - message followed by next word
     5. repeat above until pool of presidential names exhausted.  (if time permits allow replay of the whole set of names)
-
+3.  At game end user is asked if they want to play again
 ## Object Model
 
 ![object-model](assets/images/object-model.jpg)
 
 ## User Stories / Use Cases
 
-1.  user starts bash session
+1.  user starts terminal session
 
 2.  user begins with java program in terminal
-    1. displays 'Welcome to com.example.wordapi.Word Guess - US Presidential Edition'
+    1. displays 'Welcome to Word Guess - US Presidential Edition'
     2. displays 'Solve each of the 44 president name puzzles, use keyboard A through Z'
-    3. displays 'You lose the puzzle if you accumlate 6 miss quesses, lets begin'
+    3. displays 'You lose the puzzle if you accumulate 6 miss guesses, lets begin'
     4. displays the 'word is:   - - - - -    -    - - - -'  (for GEORGE W BUSH)
     5. displays the word in format of with underscores
         1. for readability:  2 spaces between each letter and 4 spaces between each name or initial
@@ -43,32 +44,32 @@ The game format is
     2. user can type again
 
 5.  user types new letter that is not in puzzle and guesses remain
-    1.  display 'com.example.wordapi.Letter <key> is a miss, n guesses remaining'
+    1.  display Letter <key> is a miss, n guesses remaining'
     2.  user can type again
 
 6.  user types new letter that is not in puzzle no remaining guesses
-    1.  display 'com.example.wordapi.Letter <key> is a miss, no remainig guesses'
+    1.  display Letter <key> is a miss, no remaining guesses'
     2.  display 'Solution is: G E O R G E    W    B U S H'
-    3.  display 'Next com.example.wordapi.Word'
+    3.  display 'Word'
     4.  displays the 'word is:   _ _ _ _    _ _ _ _ _ _ _'  (for B I L L    C L I N T O N)
 
 7.  user types new letter that is in the puzzle but doesn't solve puzzle yet
-    1.  display 'com.example.wordapi.Letter <key> is a hit.
+    1.  display 'Letter <key> is a hit.
     2.  display 'word is:  G _ _ _ G _    _    _ _ _ _"  (for G in George W Bush)
 
 8.  user types new letter that solves puzzle
     1.  display 'Solved, word is G E O R G E    W    B U S H'
-    2.  display 'Next com.example.wordapi.Word'
+    2.  display 'Word'
     4.  displays the 'word is:   _ _ _ _    _ _ _ _ _ _ _'  (for B I L L    C L I N T O N)
 
 9.  user losses or solves last puzzle
-    1. display 'Nice com.example.wordgame.Game - you got X of 44 correct'
+    1. display  - you got X of 44 correct'
     2. *** if coding time permits allow for prompt to Play Again)
         1. this would re-randomize the word pool and start new game
 
       
 
-### Psuedo Code - details TBD
+### Pseudo  Code - final details may vary slightly
 
 1. Global
     1. Variables
@@ -90,7 +91,7 @@ The game format is
             1. word - string containing the word
             2. letters - array of letter objects for the word
         2. Methods
-            1. init - constuctor function that builds letter array
+            1. init - constructor function that builds letter array
             2. updateWord - take user letter guess and calls setLetter for each letter array entry 
             3. getWord - returns terminal ready word string - has masks and spacing for readibility
             4. solveWord - used when player exhausts guesses

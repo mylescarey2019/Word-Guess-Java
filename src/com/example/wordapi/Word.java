@@ -69,12 +69,12 @@ public class Word {
         return true;
     }
 
-    // diagnostic return original word string  - REMOVE* after all testing
+    // diagnostic only - return original word string  - REMOVE* after all testing
     public String showOriginalWordString() {
         return originalWord;
     }
 
-    // diagnostic display of word's letters array - REMOVE* after all testing
+    // diagnostic only - display of word's letters array - REMOVE* after all testing
     public void showWordLetters() {
         for (Letter letter : this.letters) {
             System.out.println("Original word is: " +  originalWord + "...Letter is: "

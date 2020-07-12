@@ -21,6 +21,7 @@ public class Letter {
         this.known = Character.toUpperCase(letter) == Character.toUpperCase(this.letter) || isKnown();
     }
 
+    // getter
     public boolean isKnown() {
         return this.known;
     }

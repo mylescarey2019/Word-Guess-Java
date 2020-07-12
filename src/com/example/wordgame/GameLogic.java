@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 // class for game logic
 // this contains the core letter guessing logic, tracks game score, and draws down the word pool
 public class GameLogic {
-    //private WordPool wordPool; // temporally made public - revert to private when ready
-    public WordPool wordPool;  // temporally made public - revert to private when ready
+    public WordPool wordPool;
     public Word currentWord;
     private int guesses;
     public GameState state;
@@ -29,16 +28,11 @@ public class GameLogic {
         state = GameState.GOTONEXTWORD;
         savedDisplayableWord = "";
 
-        // temp debug output REMOVE* - when all testing done
-//            System.out.println("Word remaining: " + wordPool.isWordRemaining());
-//            wordPool.showWords();
+        nextWord();  // gets next word from wordPool, sets savedDisplayableWord, guesses, etc.
 
-        nextWord();  // gets next word from wordpool, sets savedDisplayableWord, guesses, etc.
-
-        //System.out.println("\nWelcome to Word Guess - US Presidential Edition");
         System.out.println("Solve each of the " + Game.nameCount + " US president name puzzles, use keyboard A through Z");
         System.out.println("You lose the word if you accumulate 6 missed guesses, lets begin.");
-        System.out.println("\nThe first name is [" +  savedDisplayableWord + "]");
+        System.out.println("\nThe first name is [ " +  savedDisplayableWord + " ]");
     }
 
     // reset guess count, clear used letter array, get next word object from pool
@@ -80,7 +74,7 @@ public class GameLogic {
         message += (isHit) ? " is a Hit." :  " is a Miss.";
         message += (roundOver)
                 ? ""
-                : "  Name is [ " +  displayWord + "]  Guesses remaining: " + guesses
+                : "  Name is [ " +  displayWord + " ]  Guesses remaining: " + guesses
                 + "   Letters used: " + guessedLetterString();
         System.out.println(message);
     }
