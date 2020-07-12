@@ -7,8 +7,6 @@ import java.util.Scanner;
 public class Game {
     // placeholder method
     public void playGame() {
-        System.out.println("in com.example.wordgame.Game class object summary method");
-
         // terminal input
         Scanner scan = new Scanner(System.in);
         char keyStroke;
@@ -26,7 +24,7 @@ public class Game {
                 "JIMMY CARTER","RONALD REAGAN","GEORGE H W BUSH","BILL CLINTON","GEORGE W BUSH","BARACK OBAMA","DONALD TRUMP"));
 
 
-        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("test"));
+        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("MILO","RUSSELL","GEORGE","SHERMAN","SMOKEY"));
 
         GameLogic gameLogic = new GameLogic(presidentNames);
 
@@ -62,6 +60,7 @@ public class Game {
             // TO-DO
             // ********************************************
             // terminal input goes here
+            System.out.println("\nEnter a letter 'a' through 'z'\n");
             keyStroke = scan.next().charAt(0);
             gameLogic.processGuess(keyStroke);
 
@@ -84,7 +83,7 @@ public class Game {
         }
 
         // all names have been played
-        System.out.println("\nGame over - all 44 names have been played")
+        System.out.println("\nGame over - all 44 names have been played");
         System.out.println("\nThank you for playing, your final score is, Wins: " + gameLogic.wordsWon + " Losses: " + gameLogic.wordsLost);
 
 //        System.out.println("no more words left ");
