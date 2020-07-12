@@ -35,8 +35,8 @@ public class GameLogic {
 
         nextWord();  // gets next word from wordpool, sets savedDisplayableWord, guesses, etc.
 
-        System.out.println("\nWelcome to Word Guess - US Presidential Edition");
-        System.out.println("Solve each of the 44 president name puzzles, use keyboard A through Z");
+        //System.out.println("\nWelcome to Word Guess - US Presidential Edition");
+        System.out.println("Solve each of the " + Game.nameCount + " US president name puzzles, use keyboard A through Z");
         System.out.println("You lose the word if you accumulate 6 missed guesses, lets begin.");
         System.out.println("\nThe first name is [" +  savedDisplayableWord + "]");
     }
@@ -143,15 +143,4 @@ public class GameLogic {
             }
         }
     }
-
-
-    // REMOVE* when all testing done
-    public void diagnosticSummary() {
-//        System.out.println("============");
-//        System.out.println("Current word is " + currentWord.getDisplayableWord());
-//        System.out.println("Guess Remaining: " + guesses + " words won: "
-//            + wordsWon + " words lost: " + wordsLost);
-//        System.out.println("Letters guessed: " + guessedLetterString());
-    }
-
 }

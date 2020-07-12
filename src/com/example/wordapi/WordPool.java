@@ -1,5 +1,7 @@
 package com.example.wordapi;
 
+import com.example.wordgame.Game;
+
 import java.util.ArrayList;
 
 // class for pool of word objects that are the game's president names
@@ -10,7 +12,11 @@ public class WordPool {
     public WordPool(ArrayList<String> puzzleWordList) {
         // randomly pull name from the puzzle list parameter, instantiate new word object, push into words array
         // remove name from puzzle list parameter - continue until all names created as word objects
-        int listLength = puzzleWordList.size();
+
+        //int listLength = puzzleWordList.size();
+
+        int listLength = Game.nameCount;
+
         for (int i = 0; i < listLength; i++) {
             int nextNameIndex = (int) (Math.floor(Math.random() * puzzleWordList.size()));
             words.add(new Word(puzzleWordList.get(nextNameIndex)));
@@ -36,28 +42,4 @@ public class WordPool {
             System.out.println("word " + i + " is " + words.get(i).showOriginalWordString());
         }
     }
-
-    // placeholder method - REMOVE* after all testing
-//    public void summary() {
-//        System.out.println("in com.example.wordapi.WordPool class object summary method");
-//
-//        // placeholder puzzle word :
-//        String puzzleName = "HARRY S TRUMAN";
-//        Word word = new Word(puzzleName);
-//        System.out.println(".......Puzzle Word is: " + word.getDisplayableWord());
-//        System.out.println("Is word solved..." + word.isSolved());
-//        System.out.println("Guessing letter Q");
-//        word.updateWord('Q');
-//        System.out.println("Is word solved..." + word.isSolved());
-//        word.showWordLetters();
-//        System.out.println("Guessing letter R");
-//        word.updateWord('R');
-//        System.out.println("Is word solved..." + word.isSolved());
-//        word.showWordLetters();
-//        System.out.println("Force solving the puzzle.  Solved Puzzle Word is: " + word.getSolvedDisplayableWord());
-//        System.out.println("Is word solved..." + word.isSolved());
-//        word.showWordLetters();
-//
-//        //word.summary();
-//    }
 }

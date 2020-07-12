@@ -5,101 +5,92 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
-    // placeholder method
-    public void playGame() {
-        // terminal input
-        Scanner scan = new Scanner(System.in);
-        char keyStroke;
+    public static int nameCount;
+    Scanner scan = new Scanner(System.in);
 
-//        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("JAMES POLK",
-//                "FRANKLIN D ROOSEVELT", "BARACK OBAMA"));
-        // full word list
-        ArrayList<String> presidentNames2 = new ArrayList<String>(Arrays.asList("GEORGE WASHINGTON","JOHN ADAMS","THOMAS JEFFERSON",
-                "JAMES MADISON","JAMES MONROE","JOHN QUINCY ADAMS","ANDREW JACKSON","MARTIN VAN BUREN","WILLIAM HARRISON",
-                "JOHN TYLER","JAMES POLK","ZACHARY TAYLOR","MILLARD FILLMORE","FRANKLIN PIERCE","JAMES BUCHANAN","ABRAHAM LINCOLN","ANDREW JOHNSON",
-                "ULYSSES S GRANT","RUTHERFORD B HAYES","JAMES GARFIELD",
-                "CHESTER ARTHUR","GROVER CLEVELAND","BENJAMIN HARRISON","WILLIAM MCKINLEY","THEODORE ROOSEVELT","WILLIAM H TAFT",
-                "WOODROW WILSON", "WARREN HARDING","CALVIN COOLIDGE","HERBERT HOOVER",
-                "FRANKLIN D ROOSEVELT","HARRY S TRUMAN","DWIGHT EISENHOWER","JOHN F KENNEDY","LYNDON JOHNSON","RICHARD NIXON","GERALD FORD",
-                "JIMMY CARTER","RONALD REAGAN","GEORGE H W BUSH","BILL CLINTON","GEORGE W BUSH","BARACK OBAMA","DONALD TRUMP"));
-
-
-        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("MILO","RUSSELL","GEORGE","SHERMAN","SMOKEY"));
-
-        GameLogic gameLogic = new GameLogic(presidentNames);
-
-        //WordPool wordPool = new WordPool(puzzleList);
-//        gameLogic.processGuess('t');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('x');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('T');
-////        gameLogic.diagnosticSummary();
-////        gameLogic.processGuess('e');
-////        gameLogic.diagnosticSummary();
-////        gameLogic.processGuess('s');
-////        gameLogic.diagnosticSummary();
-////        gameLogic.processGuess('o');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('w');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('n');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('q');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('y');
-//        gameLogic.diagnosticSummary();
-//        gameLogic.processGuess('S');
-////        gameLogic.diagnosticSummary();
-////        gameLogic.processGuess('s');
-////        gameLogic.diagnosticSummary();
-////        gameLogic.processGuess('o');
-
-        while (gameLogic.hasWordToPlay) {
-
-            // TO-DO
-            // ********************************************
-            // terminal input goes here
-            System.out.println("\nEnter a letter 'a' through 'z'\n");
-            keyStroke = scan.next().charAt(0);
-            gameLogic.processGuess(keyStroke);
-
-            // gameLogic.processGuess(letter) goes here
-            // ********************************************
-
-            if (gameLogic.state == GameState.GOTONEXTWORD) {
-                gameLogic.hasWordToPlay = false; // don't know if game will have any words left
-                if (gameLogic.wordPool.isWordRemaining()) {
-                    gameLogic.nextWord(); // will get next word and also toggle game.hasWord to true
-                    System.out.println("The next name is [" + gameLogic.currentWord.getDisplayableWord() + "]");
-                }
-            }
-//            gameLogic.wordPool.showWords();
-//            gameLogic.diagnosticSummary();
-//            gameLogic.hasWordToPlay = false;  // don't know if game has any words left yet
-//            if (gameLogic.wordPool.isWordRemaining()) {
-//                gameLogic.nextWord();
-//            }
+    // helper method to get number of names player wants to guess
+    private int getNameCount(boolean isFirstGame) {
+        boolean needValidCount = true;
+        if (isFirstGame) {
+            System.out.println("\nWelcome to Word Guess - US Presidential Edition");
         }
 
-        // all names have been played
-        System.out.println("\nGame over - all 44 names have been played");
-        System.out.println("\nThank you for playing, your final score is, Wins: " + gameLogic.wordsWon + " Losses: " + gameLogic.wordsLost);
+        System.out.println("Enter how many Presidents to guess - between 1 and 44");
+        int nameCount = 0;
+        while (needValidCount) {
+            while (!scan.hasNextInt()) {
+                scan.next();
+            }
+            nameCount = scan.nextInt();
+            scan.nextLine();
+            if (nameCount > 0 && nameCount < 45) {
+                System.out.println("Very good, lets proceed with " + nameCount + " US Presidents to guess.");
+                needValidCount = false;
+            } else {
+                System.out.println("Enter how many Presidents to guess - between 1 and 44");
+            }
+        }
+        return nameCount;
+    }
 
-//        System.out.println("no more words left ");
+    // helper method to see if player want to play another game
+    private boolean playAgain() {
+        char prompt = ' ';
+        do {
+            System.out.println("Play again, y/n ?");
+            prompt = scan.next().charAt(0);
+        } while (!Character.toString(prompt).matches("[ynYN]"));
+        return (prompt == 'y' || prompt == 'Y') ? true : false;
+    }
 
-//        //Word word1 = gameLogic.wordPool.getWordFromPool();
-//        System.out.println("Word remaining: " + gameLogic.wordPool.isWordRemaining());
-//        gameLogic.wordPool.showWords();
-//        Word word2 = gameLogic.wordPool.getWordFromPool();
-//        System.out.println("Word remaining: " + gameLogic.wordPool.isWordRemaining());
-//        gameLogic.wordPool.showWords();
-//        Word word3 = gameLogic.wordPool.getWordFromPool();
-//        System.out.println("Word remaining: " + gameLogic.wordPool.isWordRemaining());
-//        gameLogic.wordPool.showWords();
-//        Word word4 = gameLogic.wordPool.getWordFromPool();
-//        if (word4 == null) {
-//            System.out.println("no more words left ");
-//        }
+
+    // main game loop driver
+    public void playGame() {
+        boolean isFirstGame = true;
+        boolean playAnotherGame = true;
+        char keyStroke;
+
+        // full name list
+//        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("GEORGE WASHINGTON", "JOHN ADAMS", "THOMAS JEFFERSON",
+//                "JAMES MADISON", "JAMES MONROE", "JOHN QUINCY ADAMS", "ANDREW JACKSON", "MARTIN VAN BUREN", "WILLIAM HARRISON",
+//                "JOHN TYLER", "JAMES POLK", "ZACHARY TAYLOR", "MILLARD FILLMORE", "FRANKLIN PIERCE", "JAMES BUCHANAN", "ABRAHAM LINCOLN", "ANDREW JOHNSON",
+//                "ULYSSES S GRANT", "RUTHERFORD B HAYES", "JAMES GARFIELD",
+//                "CHESTER ARTHUR", "GROVER CLEVELAND", "BENJAMIN HARRISON", "WILLIAM MCKINLEY", "THEODORE ROOSEVELT", "WILLIAM H TAFT",
+//                "WOODROW WILSON", "WARREN HARDING", "CALVIN COOLIDGE", "HERBERT HOOVER",
+//                "FRANKLIN D ROOSEVELT", "HARRY S TRUMAN", "DWIGHT EISENHOWER", "JOHN F KENNEDY", "LYNDON JOHNSON", "RICHARD NIXON", "GERALD FORD",
+//                "JIMMY CARTER", "RONALD REAGAN", "GEORGE H W BUSH", "BILL CLINTON", "GEORGE W BUSH", "BARACK OBAMA", "DONALD TRUMP"));
+
+        // shortened test name list - the family cats
+        ArrayList<String> presidentNames = new ArrayList<String>(Arrays.asList("MILO", "RUSSELL", "GEORGE", "SHERMAN", "SMOKEY"));
+        GameLogic gameLogic;
+
+        while (playAnotherGame) {
+            this.nameCount = getNameCount(isFirstGame);
+            // create a new instance of the game
+            // To-Do:  as better alternative look into creating a reset method in gameLogic class
+            gameLogic = new GameLogic(presidentNames);
+
+            while (gameLogic.hasWordToPlay) {
+                System.out.println("\nEnter a letter 'a' through 'z'\n");
+                keyStroke = scan.next().charAt(0);
+                gameLogic.processGuess(keyStroke);
+
+                if (gameLogic.state == GameState.GOTONEXTWORD) {
+                    gameLogic.hasWordToPlay = false; // don't know if game will have any words left
+                    if (gameLogic.wordPool.isWordRemaining()) {
+                        gameLogic.nextWord(); // will get next word and also toggle game.hasWord to true
+                        System.out.println("The next name is [" + gameLogic.currentWord.getDisplayableWord() + "]");
+                    }
+                }
+            }
+
+            // all names have been played
+            System.out.println("\nGame over - all " + Game.nameCount + " US president names have been played");
+            System.out.println("\nYour final score is, Wins: " + gameLogic.wordsWon + " Losses: " + gameLogic.wordsLost);
+
+            isFirstGame = false;
+            playAnotherGame = playAgain();
+        }
+        System.out.println("\nThanks for playing");
     }
 }
